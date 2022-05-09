@@ -1,0 +1,151 @@
+2021S-CS502: Midterm Exam Worksheet
+====================================
+
+
+
+Student name
+-------------
+Alice (alice@wpi.edu)
+
+
+Q1:
+
+Refer to Chapter 2. 
+OS, a body of softwares,  that is in charge of making the system operate correctly and efficiently, as well easy-to-use.
+OS is also considered a resource manager.
+
+Importance: ubiquitous, mature techniques, fundamental to other system disciplines like distributed systems and low-level system security etc.
+
+---
+
+Q2:
+
+This new shell does not work! Because the shell will be replaced with the new command and fork is never called.
+
+---
+
+
+Q3:
+
+
+1. FIFO B. Not Possible. FIFO would run to completion, the schedule above does not
+2. Round Robin A. Possible. Switch jobs in RR order every 10 time units.
+3. Multi-level Feedback Queue A. Possible. Can act like RR, so is possible. Could have stayed on same queue, or switch queues.
+4. Lottery Scheduling A. Possible. With lottery (random), anything is possible.
+
+---
+
+
+Q4:
+
+A small fixed # of random generator is bad for lottery as some jobs will never be chosen! This leads to starvation etc.
+
+
+---
+
+Q5:
+
+Basically this leads to more frequently priority boost.
+General effect: moves all jobs to the top thus lessening the starvation effect and more rapidly re-evaluate job behaviors (can be more adaptive to job characteristic changes;)
+The problem is that, if done too often, the scheduler essentially becomes more and more like RR...
+
+
+---
+
+
+
+Q6:
+
+
+all possible.
+
+1. MLFQ learns things about running jobs A. Possible/True. By moving jobs down queues, it learns that they are long running (for example).
+2. MLFQ starves long running jobs B. Not Possible/False. By bumping priority on occasion, MLFQ avoids starvation.
+3. MLFQ uses different length time slices for jobs A. Possible/True. sometimes, across different queues.
+4. MLFQ uses round robin A. Possible/True. within a given level.
+5. MLFQ forgets what it has learned about running jobs sometimes A. Possible/True, with priority bump to top priority, all jobs look the same now, and all is forgotten about them.
+
+---
+
+Q7:
+
+1KB virtual address space means 1024 bytes can be accessed by program, from 0 ... 1023. Base-and-bounds places this address space into physical memory at physically address 10,000 (as above). However, only the first 100 virtual addresses are legal (0 ... 99), which translate to physical addresses 10,000 ... 10,099. Thus:
+
+PA1. 0 B. Not Possible
+PA2. 1000 B. Not Possible
+PA3. 10000 A. Possible
+PA4. 10050 A. Possible
+PA5. 10100 B. Not Possible
+
+---
+
+Q8:
+
+1. Faster translation B. Not Possible. Translation with Segmentation is not faster.
+2. Less physical memory waste A. Possible. Less waste is possible, because space between a stack and heap need not be allocated.
+3. Better sharing of code in memory A. Possible. Code segments, marked read only, can be shared.
+4. More hardware support needed to implement it B. Not Possible. More hardware support is needed, BUT, this is not an advantage.
+5. More OS issues to handle, such as compaction B. Not Possible. More OS issues must be handled, BUT, this is not an advantage.
+
+
+---
+
+
+Q9:
+
+With the above address space, virtual addresses 0 ... 19 are valid (the first 20 bytes of the AS, as described by the segment 0 base/limit pair), and virtual addresses 127 ... 108 are valid too (the last 20 bytes of the AS. It doesn’t matter where they map to in physical space for this question. Thus:
+
+VA1. 0x1d (decimal: 29) B. Not Possible
+VA2. 0x7b (decimal: 123) A. Possible
+VA3. 0x10 (decimal: 16) A. Possible
+VA4. 0x5a (decimal: 90) B. Not Possible
+VA5. 0x0a (decimal: 10) A. Possible
+---
+
+Q10:
+
+First, we know that 8 = 1000; so a valid PTE will be one that starts with 0x8, so that is VPN 0, 4,5,6,7.
+Second, we know that virtual address takes 7 bits, and uses the first 3 bits to distinguish between 8 pages. Therefore, the first hex digit below tells us the VPN and thus whether each access is valid or not.
+
+
+VA1. 0x34 (decimal: 52) B. Not Valid VPN=3
+VA2. 0x44 (decimal: 68) A. Valid VPN=4
+VA3. 0x57 (decimal: 87) A. Valid VPN=5
+VA4. 0x18 (decimal: 24) B. Not Valid VPN=1
+---
+
+Q11:
+
+The key ends up being: does having 4-entry (LRU) TLB improve performance? If any TLB hits occur, the answer is yes, otherwise no. 
+page size is 64 bytes, which let us figure out which virtual pages are accessed...
+
+Trace A: A. Speed up Three pages accessed repeatedly; first miss, miss, miss, but then hit, hit hit, etc.
+Trace B: B. No Speedup 5 pages being accessed in a cyclical pattern; result is that each access is a TLB miss.
+Trace C: A. Speed up Just one page being accessed repeatedly, so mostly hits (except first access).
+Trace D: Speed up 4 pages being accessed repeatedly, misses the first time, then hits.
+
+---
+
+Q12:
+
+1. true, for example, if a byte is valid on each page of the virtual address space (i.e., not sparse), the multi-level structure ends up storing every single PTEs in the physical memory (same as using the linear page table); but on top of that, it also needs to store the page directory...
+2. true, since the linear table must be allocated contiguously, but the multi-level table is chopped into chunks. Thus allocating physical memory for pages of the multi-level table is just as any as other paging data...easy
+3. generally true, since it involves more memory access...(those mappings might be stored in TLB)
+4. false... TLBs make translation faster, but it does not have any bearing on the page table size!
+
+---
+
+Q13
+
+Examples:
+multi-level page table, indirection. 
+TLB, caching;
+swapping, caching.
+
+
+---
+
+
+Errata
+------
+Things you think the Prof. Guo needs to know.

@@ -1,0 +1,252 @@
+2022S-CS502: Midterm Exam Worksheet
+====================================
+
+
+
+Student name
+-------------
+Alice (alice@wpi.edu)
+
+
+Q1:
+
+(a) B
+
+(b) A 
+
+(c) B
+
+(d) B
+
+(e) B
+
+Why? the second process will not run since the first process never calls line 5.
+
+---
+
+Q2:
+
+(a)
+1. A 
+
+2. A 
+
+3. B 
+
+4. B 
+
+5. B
+
+The first two are possible. The first one is possible when fork() fails;
+the parent will still complete, thus printing 'a' and 'b'.
+The second one is possible when the fork() succeeds.
+fork() creates a new process (when it works, as it does here) which is a copy of the existing process. In this case, because printf() takes place immediately, 'a' prints in the parent, and then each the parent and child print 'b'. Thus, 'abb' is the output.
+
+(b)
+
+1. fork called 
+
+2. fork returned  
+
+3. fork returned  
+
+4. exec called 
+
+5. wait called 
+
+6. fork called 
+
+7. fork returned
+
+8. exec called, exec returned
+
+9. fork returned
+
+10. wait returned
+
+
+The only tricky thing is that exec only returns when it fails!
+
+---
+
+
+Q3:
+
+
+(a) A 
+
+(b) A 
+
+(c) A 
+
+(d) A 
+
+(e) A 
+
+(f) A 
+
+(g) B 
+
+(h) B 
+
+(i) B 
+
+(j) C 
+
+(k) C 
+
+(l) C 
+
+(m) B 
+
+(n) B 
+
+(o) B 
+
+(p) A 
+
+(q) A 
+
+(r) A 
+
+(s) B 
+
+(t) B 
+
+(u) B 
+
+(v) C 
+
+(w) A 
+
+(x) A 
+
+See Figure 6.2 of the OSTEP book. 
+
+---
+
+
+Q4:
+
+(a) 1, 3, 5, 8, 13 
+
+(b)
+
+Trace 1: 5 (or 13), 8, 8;
+
+Trace 2:  5, 1, 8
+
+Trace 3:  5, 1, 8, 8, 3
+
+Trace 4: 3
+
+Trace 5: 5 (or 13), 3, 8, 1, 13 
+
+
+---
+
+Q5:
+
+Trace 1: 
+(a) 100
+
+(b) 4
+
+(c) 1001
+
+(d) 3 
+
+
+Trace 2: 
+(a) 1000
+
+(b) 2 
+
+(c) 900
+
+(d) 1
+
+
+Trace 3: 
+(a) 97
+
+(b) 4
+
+(c) - 
+
+(d) 0 
+
+---
+
+
+
+Q6:
+
+(a) 0, - 
+
+(b) 1, 2 
+
+(c) 1, 9 
+
+(d) 0, - 
+
+(e) 0, -
+
+(f) 1, 0xe
+
+(g) 1, 6
+
+(h) 0, -
+
+---
+
+Q7:
+
+(a)
+1. hit: [6,7,9] to [6,9,7]; basically moving the current entry to the end of the queue
+
+2. hit: [6,9,7] to [6,7,9]
+
+3. miss: [6,7,9] to [6,7,9,0]
+
+4. miss: [6,7,9,0] to [7,9,0,4]
+
+5. hit: [7,9,0,4] to [7,0,4,9]
+
+(b)
+
+1. A
+
+2. B
+
+3. A
+
+4. A 
+
+See 2021S midterm questions. 
+
+---
+
+Q8:
+
+(a) 18, 90, 98
+
+(b) 0x00
+
+(c) 18, 57, 30
+
+(d) 0x1c 
+
+
+The key is to figure out that we need 5 bits to represent the 32 unique PTEs in the page; because the page size is 32 bytes, and each PTE is 1 byte. Then we are left with 5 bits to represent the PDE.
+
+the first address 0x3a3a in binary is 01110 10001 11010; then we know the 14th bytes on page 18 is where the corresponding page of the PTEs live; so we get 0xda which removes the first bit, will be 90 in decimal. So now, we know that the PTE is the 17th bytes on the page 90, from which we get 0xe2 (1110 0010), removing the first bit gives PFN = 98 in decimal (110 0010); so we will go get the (11010)26th byte from page 98, which will be 0x00.
+
+What about 0x74f6? Try it out yourself! 
+
+---
+
+
+Errata
+------
+Things you think the teaching staff needs to know.
